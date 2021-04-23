@@ -23,6 +23,14 @@ function printPrices() {
         return a.dateTime - b.dateTime;
     });
 
+    // var startDate = (new Date();
+    // var endDate = new Date();
+
+    // var transactions = transactions.filter(a => {
+    // var date = new Date(a.ProductHits);
+    // return (date >= startDate && date <= endDate);
+    // });
+
     let totaCost = 0.0;
     let totaQty = 0.0;
     for (let i = 0; i < transactions.length; i++) {
@@ -36,7 +44,7 @@ function printPrices() {
             totaCost += cost;
             totaQty += transaction.qty;
         }
-        console.log(transaction.type, cost.toFixed(2), totaCost.toFixed(2), transaction.qty, totaQty);
+        console.log(transaction.type, '\t', cost.toFixed(2),'\t', totaCost.toFixed(2),'\t', transaction.qty, '\t',totaQty);
     }
 
 }
