@@ -36,7 +36,6 @@ function printPrices() {
     for (let i = 0; i < transactions.length; i++) {
         let transaction = transactions[i];
         let cost = transaction.qty*transaction.price;
-        // console.log(transaction.dateTime );
         if(transaction.type == "buy"){
             totaCost -= cost;
             totaQty -= transaction.qty;
@@ -44,7 +43,7 @@ function printPrices() {
             totaCost += cost;
             totaQty += transaction.qty;
         }
-        console.log(transaction.type, '\t', cost.toFixed(2),'\t', totaCost.toFixed(2),'\t', transaction.qty, '\t',totaQty);
+        console.log(transaction.type, '\t$', cost.toFixed(2),'\t$', totaCost.toFixed(2),'\t', transaction.qty, '\t',totaQty);
     }
 
 }
