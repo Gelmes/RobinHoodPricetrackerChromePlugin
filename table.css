@@ -1,0 +1,18 @@
+.outputTable {
+    width: 60%;
+    /* border-style: solid; */
+    /* border-width: 2px; */
+    /* border-color: white; */
+    margin: 10px;
+}
+/* .outputContentRow {
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+} */
+.outputContentColumn {
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+    padding: 0px 5px;
+}
