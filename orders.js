@@ -5,6 +5,8 @@ class Order {
         this.limit = element.children[0].children[0].children[0].children[0].children[2].children[0].innerHTML.split(" ")[0].toLowerCase();
         this.type = element.children[0].children[0].children[0].children[0].children[2].children[0].innerHTML.split(" ")[1].toLowerCase();
         this.status = element.children[0].children[0].children[0].children[2].children[2].innerHTML.toLowerCase();
+        this.cancel = element.children[0].children[1].children[0].children[0];
+        console.log(this.cancel);
 
         let tempPrice = element.children[0].children[0].children[0].children[3].children[2].innerHTML;
         this.price = Number(tempPrice.replace(/[^0-9.-]+/g,""));
@@ -34,6 +36,13 @@ class TableMaker {
         this.rows[row].appendChild(column);
         column.innerHTML = content;
     }
+    
+    addColumnChild(row, child){
+        let column = document.createElement("td");
+        column.classList.add("outputContentColumn");
+        this.rows[row].appendChild(column);
+        column.appendChild(child);
+    }
 }
 
 function printOrders() {
@@ -60,12 +69,13 @@ function printOrders() {
     let totalSellQty = 0;
 
     let rowNumber = table.addRow();
-    table.addColumn(rowNumber, "Buy");
+    table.addColumn(rowNumber, "--  Buys  --");
     table.addColumn(rowNumber, "Type");
     table.addColumn(rowNumber, "Status");
     table.addColumn(rowNumber, "Price");
     table.addColumn(rowNumber, "Cost");
     table.addColumn(rowNumber, "Quantity");
+    table.addColumn(rowNumber, "Cancel");
 
     console.log("\n===== Buy Limit Orders =====");
     for (let i = 0; i < orders.length; i++) {
@@ -81,6 +91,7 @@ function printOrders() {
             table.addColumn(rowNumber, order.price.toFixed(4));
             table.addColumn(rowNumber, order.cost.toFixed(2));
             table.addColumn(rowNumber, order.qty.toFixed(2));
+            table.addColumnChild(rowNumber, order.cancel);
 
             totalBuy += order.cost;
             totalBuyQty += order.qty;
@@ -93,6 +104,7 @@ function printOrders() {
     table.addColumn(rowNumber, "   ");
     table.addColumn(rowNumber, "   ");
     table.addColumn(rowNumber, totalBuy);
+    table.addColumn(rowNumber, "   ");
     table.addColumn(rowNumber, totalBuyQty);
 
     rowNumber = table.addRow();
@@ -102,15 +114,17 @@ function printOrders() {
     table.addColumn(rowNumber, "   ");
     table.addColumn(rowNumber, "   ");
     table.addColumn(rowNumber, "   ");
+    table.addColumn(rowNumber, "   ");
 
     
     rowNumber = table.addRow();
-    table.addColumn(rowNumber, "Sell");
+    table.addColumn(rowNumber, "--  Sells  --");
     table.addColumn(rowNumber, "Type");
     table.addColumn(rowNumber, "Status");
     table.addColumn(rowNumber, "Price");
     table.addColumn(rowNumber, "Cost");
     table.addColumn(rowNumber, "Quantity");
+    table.addColumn(rowNumber, "Cancel");
 
     console.log("\n===== Buy Sell Orders =====");
     for (let i = 0; i < orders.length; i++) {
@@ -127,6 +141,7 @@ function printOrders() {
             table.addColumn(rowNumber, order.price.toFixed(4));
             table.addColumn(rowNumber, order.cost.toFixed(2));
             table.addColumn(rowNumber, order.qty.toFixed(2));
+            table.addColumnChild(rowNumber, order.cancel);
 
             totalSell += order.cost;
             totalSellQty += order.qty;
@@ -140,7 +155,8 @@ function printOrders() {
     table.addColumn(rowNumber, "   ");
     table.addColumn(rowNumber, totalSell);
     table.addColumn(rowNumber, totalSellQty);
-
+    table.addColumn(rowNumber, "   ");
+    
     outputDiv.appendChild(table.content);
 }
 
